@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   const slugs = (Array.isArray(body.slugs) ? body.slugs : []).filter((s): s is string => typeof s === 'string' && VALID.has(s) && (active || free.has(s)));
   if (!slugs.length) return NextResponse.json({ ok: true, saved: 0 });
   const sb = await supabaseServer();
-  const { error } = await sb.from('progress').upsert(slugs.map(s => ({ user_id: user.id, lesson_slug: s })), { onConflict: 'user_id,lesson_slug', ignoreDuplicates: true });
+  const { error } = await sb.from('fs_progress').upsert(slugs.map(s => ({ user_id: user.id, lesson_slug: s })), { onConflict: 'user_id,lesson_slug', ignoreDuplicates: true });
   if (error) { console.error('[progress]', error); return NextResponse.json({ ok: false }, { status: 500 }); }
   return NextResponse.json({ ok: true, saved: slugs.length });
 }

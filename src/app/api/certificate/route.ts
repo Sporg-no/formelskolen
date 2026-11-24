@@ -15,13 +15,13 @@ export async function POST(req: NextRequest) {
   const name = (body.name ?? '').trim().replace(/\s+/g, ' ').slice(0, 80);
   if (name.length < 3) return NextResponse.json({ error: 'Skriv fullt navn slik det skal stå på sertifikatet.' }, { status: 400 });
   const admin = supabaseAdmin();
-  const { data: rows } = await admin.from('progress').select('lesson_slug').eq('user_id', user.id);
+  const { data: rows } = await admin.from('fs_progress').select('lesson_slug').eq('user_id', user.id);
   const done = new Set((rows ?? []).map(r => r.lesson_slug));
   const missing = LESSONS.filter(l => !done.has(l.slug));
   if (missing.length) return NextResponse.json({ error: `Du mangler ${missing.length} leksjoner, blant annet «${missing[0].title}».` }, { status: 400 });
-  const { data: existing } = await admin.from('certificates').select('id').eq('user_id', user.id).maybeSingle();
+  const { data: existing } = await admin.from('fs_certificates').select('id').eq('user_id', user.id).maybeSingle();
   const id = existing?.id ?? randomBytes(6).toString('hex').toUpperCase();
-  const { error } = await admin.from('certificates').upsert({ id, user_id: user.id, name, lessons: LESSONS.length }, { onConflict: 'user_id' });
+  const { error } = await admin.from('fs_certificates').upsert({ id, user_id: user.id, name, lessons: LESSONS.length }, { onConflict: 'user_id' });
   if (error) { console.error('[certificate]', error); return NextResponse.json({ error: 'Kunne ikke lagre sertifikatet.' }, { status: 500 }); }
   return NextResponse.json({ id });
 }

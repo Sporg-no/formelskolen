@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 async function userFor(sub: Stripe.Subscription): Promise<string | null> {
   if (sub.metadata?.user_id) return sub.metadata.user_id;
   const cust = typeof sub.customer === 'string' ? sub.customer : sub.customer.id;
-  const { data } = await supabaseAdmin().from('subscriptions').select('user_id')
+  const { data } = await supabaseAdmin().from('fs_subscriptions').select('user_id')
     .or(`stripe_subscription_id.eq.${sub.id},stripe_customer_id.eq.${cust}`).limit(1).maybeSingle();
   return (data?.user_id as string) ?? null;
 }
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
         if (!userId) break;
         const customer = typeof s.customer === 'string' ? s.customer : s.customer?.id ?? null;
         if (s.mode === 'payment' && s.payment_status === 'paid') {
-          const { data: prev } = await supabaseAdmin().from('subscriptions').select('stripe_subscription_id, status').eq('user_id', userId).maybeSingle();
+          const { data: prev } = await supabaseAdmin().from('fs_subscriptions').select('stripe_subscription_id, status').eq('user_id', userId).maybeSingle();
           await saveLifetime(userId, customer, s.metadata?.consent_at);
           // Livstid kjøpt mens et abonnement løper: avslutt abonnementet så kunden ikke betaler dobbelt
           if (prev?.stripe_subscription_id && prev.status !== 'canceled') {

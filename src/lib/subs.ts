@@ -5,7 +5,7 @@ import { supabaseAdmin } from '@/lib/supabase/admin';
 const iso = (s?: number | null) => (s ? new Date(s * 1000).toISOString() : null);
 
 export async function saveSubscription(userId: string, sub: Stripe.Subscription, consentAt?: string) {
-  const { data: existing } = await supabaseAdmin().from('subscriptions').select('status').eq('user_id', userId).maybeSingle();
+  const { data: existing } = await supabaseAdmin().from('fs_subscriptions').select('status').eq('user_id', userId).maybeSingle();
   // Livstidstilgang skal aldri overskrives av et gammelt abonnement
   if (existing?.status === 'lifetime') return;
   const item = sub.items?.data?.[0];
@@ -23,12 +23,12 @@ export async function saveSubscription(userId: string, sub: Stripe.Subscription,
     updated_at: new Date().toISOString(),
   };
   if (consentAt) row.consent_at = consentAt;
-  const { error } = await supabaseAdmin().from('subscriptions').upsert(row, { onConflict: 'user_id' });
+  const { error } = await supabaseAdmin().from('fs_subscriptions').upsert(row, { onConflict: 'user_id' });
   if (error) throw error;
 }
 
 export async function saveLifetime(userId: string, customer: string | null, consentAt?: string) {
-  const { error } = await supabaseAdmin().from('subscriptions').upsert({
+  const { error } = await supabaseAdmin().from('fs_subscriptions').upsert({
     user_id: userId, stripe_customer_id: customer, status: 'lifetime', interval: 'lifetime',
     cancel_at_period_end: false, current_period_end: null, consent_at: consentAt ?? null, updated_at: new Date().toISOString(),
   }, { onConflict: 'user_id' });

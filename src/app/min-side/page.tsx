@@ -19,7 +19,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ k
   const done = new Set(await serverProgress());
   const n = LESSONS.filter(l => done.has(l.slug)).length;
   const sb = await supabaseServer();
-  const { data: cert } = await sb.from('certificates').select('id, name').eq('user_id', user.id).maybeSingle();
+  const { data: cert } = await sb.from('fs_certificates').select('id, name').eq('user_id', user.id).maybeSingle();
 
   let status = 'Gratis konto. Du har tilgang til de gratis leksjonene.';
   if (owner) status = 'Eier. Full tilgang uten abonnement.';

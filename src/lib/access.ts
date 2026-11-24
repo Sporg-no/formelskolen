@@ -31,7 +31,7 @@ export const getSession = cache(async () => {
   const sb = await supabaseServer();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return { user: null, sub: null as Sub | null, active: false, configured: true };
-  const { data } = await sb.from('subscriptions')
+  const { data } = await sb.from('fs_subscriptions')
     .select('status, interval, current_period_end, cancel_at_period_end, stripe_customer_id')
     .eq('user_id', user.id).maybeSingle();
   const sub = (data as Sub | null) ?? null;
@@ -43,6 +43,6 @@ export async function serverProgress(): Promise<string[]> {
   const { user } = await getSession();
   if (!user) return [];
   const sb = await supabaseServer();
-  const { data } = await sb.from('progress').select('lesson_slug').eq('user_id', user.id);
+  const { data } = await sb.from('fs_progress').select('lesson_slug').eq('user_id', user.id);
   return (data ?? []).map(r => r.lesson_slug as string);
 }

@@ -9,7 +9,7 @@ type P = { params: Promise<{ id: string }> };
 async function load(id: string) {
   if (!/^[A-F0-9]{12}$/.test(id)) return null;
   try {
-    const { data } = await supabaseAdmin().from('certificates').select('id, name, lessons, issued_at').eq('id', id).maybeSingle();
+    const { data } = await supabaseAdmin().from('fs_certificates').select('id, name, lessons, issued_at').eq('id', id).maybeSingle();
     return data;
   } catch { return null; }
 }
