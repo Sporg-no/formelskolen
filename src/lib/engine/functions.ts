@@ -214,7 +214,7 @@ def('AVKORT', 'TRUNC', 'Matte', 'AVKORT(tall; [antall_sifre])', 'Kutter desimale
 def('HELTALL', 'INT', 'Matte', 'HELTALL(tall)', 'Runder ned til nærmeste heltall.', (a, ev) => { argc(a, 1); return Math.floor(toNumber(ev.val(a[0]))); });
 def('ABS', 'ABS', 'Matte', 'ABS(tall)', 'Tallverdien uten fortegn.', (a, ev) => { argc(a, 1); return Math.abs(toNumber(ev.val(a[0]))); });
 def('ROT', 'SQRT', 'Matte', 'ROT(tall)', 'Kvadratroten av et tall.', (a, ev) => { argc(a, 1); const n = toNumber(ev.val(a[0])); if (n < 0) fail('#TALL!'); return Math.sqrt(n); });
-def('POTENS', 'POWER', 'Matte', 'POTENS(tall; potens)', 'Opphøyer et tall i en potens (samme som ^).', (a, ev) => { argc(a, 2); return Math.pow(toNumber(ev.val(a[0])), toNumber(ev.val(a[1]))); });
+def('OPPHØYD.I', 'POWER', 'Matte', 'OPPHØYD.I(tall; potens)', 'Opphøyer et tall i en potens (samme som ^).', (a, ev) => { argc(a, 2); return Math.pow(toNumber(ev.val(a[0])), toNumber(ev.val(a[1]))); }, ['POTENS']);
 def('REST', 'MOD', 'Matte', 'REST(tall; divisor)', 'Resten etter divisjon.', (a, ev) => {
   argc(a, 2);
   const n = toNumber(ev.val(a[0])), d = toNumber(ev.val(a[1]));
@@ -293,11 +293,11 @@ def('ANTALL.HVIS.SETT', 'COUNTIFS', 'Statistikk', 'ANTALL.HVIS.SETT(område1; vi
   if (a.length < 2 || a.length % 2) fail('#VERDI!');
   return maskFor(a, ev).filter(Boolean).length;
 });
-def('STØRST.HVIS.SETT', 'MAXIFS', 'Statistikk', 'STØRST.HVIS.SETT(maksområde; område1; vilkår1; …)', 'Største tall som oppfyller vilkårene.', (a, ev) => {
+def('MAKS.HVIS.SETT', 'MAXIFS', 'Statistikk', 'MAKS.HVIS.SETT(maksområde; område1; vilkår1; …)', 'Største tall som oppfyller vilkårene.', (a, ev) => {
   const vals = flat(ev.val(a[0])); const mask = maskFor(a.slice(1), ev);
   const n = vals.filter((v, i) => mask[i] && typeof v === 'number') as number[];
   return n.length ? Math.max(...n) : 0;
-}, ['MAKS.HVIS.SETT']);
+}, ['STØRST.HVIS.SETT']);
 def('MIN.HVIS.SETT', 'MINIFS', 'Statistikk', 'MIN.HVIS.SETT(minområde; område1; vilkår1; …)', 'Minste tall som oppfyller vilkårene.', (a, ev) => {
   const vals = flat(ev.val(a[0])); const mask = maskFor(a.slice(1), ev);
   const n = vals.filter((v, i) => mask[i] && typeof v === 'number') as number[];

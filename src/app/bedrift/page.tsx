@@ -23,7 +23,7 @@ export default function Page() {
             <ul style={{ color: 'var(--body)', paddingLeft: 20 }}>
               <li>Ungdomsskole, videregående, fagskole og voksenopplæring</li>
               <li>Passer til regneark i matematikk, økonomi og IT-fag</li>
-              <li>Læreren får en lenke elevene bruker for å få tilgang</li>
+              <li>Læreren får en klassekode. Elevene trenger ikke konto</li>
             </ul>
             <p className="small muted">Læreren må ta kontakt fra skolens e-postadresse. Vi kan ikke gi gratis tilgang til elever direkte.</p>
             <a className="btn btn-sig" href={school}>Be om skoletilgang</a>

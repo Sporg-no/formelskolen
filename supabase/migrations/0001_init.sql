@@ -36,3 +36,13 @@ create table if not exists public.fs_certificates (
 alter table public.fs_certificates enable row level security;
 create policy "fs sertifikat: les eget" on public.fs_certificates for select to authenticated using ((select auth.uid()) = user_id);
 -- Offentlig verifisering av sertifikater skjer via serveren med hemmelig nøkkel.
+
+-- Klassekoder for skoler (gratis tilgang uten elevkontoer). Bare serveren leser og skriver.
+create table if not exists public.fs_classes (
+  code text primary key check (code ~ '^[A-Z0-9]{4,12}$'),
+  school text not null,
+  teacher_email text,
+  expires_at timestamptz not null,
+  created_at timestamptz not null default now()
+);
+alter table public.fs_classes enable row level security;

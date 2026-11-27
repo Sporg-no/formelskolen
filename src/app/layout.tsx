@@ -6,6 +6,7 @@ import '@fontsource/inter-tight/800.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 import { siteUrl } from '@/lib/env';
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export const viewport: Viewport = { themeColor: '#10201A', width: 'device-width'
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="nb">
-      <body>{children}</body>
+      <body>{children}<Analytics /></body>
     </html>
   );
 }

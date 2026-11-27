@@ -3,6 +3,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { CATALOG, type Category } from '@/lib/engine/functions';
 import { LESSONS } from '@/content/lessons';
+import { fnSlug } from '@/content/fnSlug';
 
 export const metadata: Metadata = {
   title: 'Excel-funksjoner på norsk og engelsk',
@@ -40,7 +41,7 @@ export default function Page() {
                       const l = lessonFor(f.no);
                       return (
                         <tr key={f.no} id={f.no}>
-                          <td>{f.no}</td>
+                          <td><a href={`/funksjoner/${fnSlug(f.no)}`} style={{ color: 'inherit' }}>{f.no}</a></td>
                           <td>{f.en}</td>
                           <td className="mono" style={{ fontSize: 13, color: 'var(--body)', whiteSpace: 'nowrap' }}>={f.syntax}</td>
                           <td>{f.desc}{l && <> <a href={`/leksjoner/${l.slug}`} className="small" style={{ color: 'var(--sig-ink)', fontWeight: 600 }}>Øv på det →</a></>}</td>

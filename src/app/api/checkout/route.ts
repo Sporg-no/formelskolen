@@ -32,7 +32,11 @@ export async function POST(req: NextRequest) {
     success_url: `${site}/min-side?kjop=ok`,
     cancel_url: `${site}/priser?avbrutt=1`,
   };
-  if (p.recurring) params.subscription_data = { metadata: { user_id: user.id, consent_at: now } };
+  if (p.recurring) {
+    params.subscription_data = { metadata: { user_id: user.id, consent_at: now } };
+    // Testbrukere med 100 % rabattkode skal slippe å legge inn kort
+    params.payment_method_collection = 'if_required';
+  }
   else params.payment_intent_data = { metadata: { user_id: user.id, plan } };
   // Nye Stripe-kontoer har «Managed Payments» på, som ikke tillater egen samtykketekst.
   (params as Record<string, unknown>).managed_payments = { enabled: false };
