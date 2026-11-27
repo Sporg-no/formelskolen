@@ -51,7 +51,7 @@ export default function LoginForm({ next }: { next: string }) {
   if (sent) {
     return (
       <form onSubmit={verify} style={col}>
-        <div className="ok">Vi har sendt en e-post til <b>{email}</b>. Trykk på lenken i e-posten, eller skriv inn koden her.</div>
+        <div className="ok">Vi har sendt en e-post til <b>{email}</b>. Skriv inn koden fra e-posten her, eller trykk på knappen i e-posten.</div>
         <div className="field">
           <label htmlFor="code" className="label">Kode fra e-posten</label>
           <input id="code" className="input code" inputMode="numeric" autoComplete="one-time-code" maxLength={10} value={code} onChange={e => setCode(e.target.value.replace(/\D/g, ''))} />

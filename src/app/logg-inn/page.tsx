@@ -8,7 +8,7 @@ import { getSession } from '@/lib/access';
 export const metadata: Metadata = { title: 'Logg inn', robots: { index: false } };
 
 const MSG: Record<string, string> = {
-  lenke: 'Lenken er brukt eller utløpt. Be om en ny.',
+  lenke: 'Lenken er brukt eller utløpt. Be om en ny, eller bruk koden i e-posten.',
   feil: 'Innloggingen ble avbrutt. Prøv igjen.',
 };
 

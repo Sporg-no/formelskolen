@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
   const sp = req.nextUrl.searchParams;
   const n = sp.get('next') || '/leksjoner';
   const next = n.startsWith('/') && !n.startsWith('//') ? n : '/leksjoner';
-  if (sp.get('error')) redirect('/logg-inn?e=feil');
+  if (sp.get('error')) redirect(sp.get('error_code') === 'otp_expired' ? '/logg-inn?e=lenke' : '/logg-inn?e=feil');
   const sb = await supabaseServer();
   const code = sp.get('code');
   const tokenHash = sp.get('token_hash');
