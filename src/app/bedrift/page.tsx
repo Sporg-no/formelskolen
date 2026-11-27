@@ -26,7 +26,7 @@ export default function Page() {
               <li>Læreren får en klassekode. Elevene trenger ikke konto</li>
             </ul>
             <p className="small muted">Læreren må ta kontakt fra skolens e-postadresse. Vi kan ikke gi gratis tilgang til elever direkte.</p>
-            <a className="btn btn-sig" href={school}>Be om skoletilgang</a>
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}><a className="btn btn-sig" href={school}>Be om skoletilgang</a><a className="btn btn-line" href="/for-larere">Les mer for lærere</a></div>
           </div>
           <div className="card">
             <div className="label">Bedrifter</div>

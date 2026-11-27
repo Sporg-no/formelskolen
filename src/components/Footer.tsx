@@ -8,7 +8,8 @@ export default function Footer() {
           <a href="/leksjoner">Leksjoner</a>
           <a href="/funksjoner">Norske funksjonsnavn</a>
           <a href="/priser">Priser</a>
-          <a href="/bedrift">Skoler og bedrifter</a>
+          <a href="/for-larere">For lærere</a>
+          <a href="/bedrift">Bedrifter</a>
           <a href="/vilkar">Vilkår</a>
           <a href="/personvern">Personvern</a>
         </div>
