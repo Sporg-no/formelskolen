@@ -1,4 +1,5 @@
 import Nav from '@/components/Nav';
+import TesterBanner from '@/components/TesterBanner';
 import Footer from '@/components/Footer';
 import DemoSheet from '@/components/DemoSheet';
 import PlanCards from '@/components/PlanCards';
@@ -24,6 +25,7 @@ export default async function Home() {
   const show = SHOW.map(n => CATALOG.find(f => f.no === n)!).filter(Boolean);
   return (
     <>
+      <TesterBanner />
       <Nav />
       <header className="hero wrap">
         <div>

@@ -20,6 +20,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ a
         <p className="lead" style={{ margin: '16px 0 36px' }}>Alle {LESSONS.length} leksjonene, prosjektene og sertifikatet. De {FREE_COUNT} første leksjonene er gratis uansett.</p>
         {sp.avbrutt && <div className="err" style={{ marginBottom: 24, maxWidth: 720 }}>Betalingen ble avbrutt. Ingenting er trukket.</div>}
         {active && <div className="ok" style={{ marginBottom: 24, maxWidth: 720 }}>Du har allerede full tilgang{sub?.status === 'lifetime' ? ' for alltid' : ''}. <a href="/min-side">Gå til Min side</a>.</div>}
+        {process.env.NEXT_PUBLIC_TESTER_CODE && !active && (
+          <div className="ok" style={{ marginBottom: 24, maxWidth: 720 }}>
+            <b>Testbruker?</b> Logg inn, huk av samtykket og velg <b>Måned</b>. Trykk «Legg til kampanjekode» i kassen og skriv <b className="mono">{process.env.NEXT_PUBLIC_TESTER_CODE}</b>. Det koster 0 kr, og du trenger ikke legge inn kort.
+          </div>
+        )}
         <PlanCards loggedIn={!!user} configured={stripeConfigured()} />
         <div className="grid2" style={{ marginTop: 56, maxWidth: 980 }}>
           <div className="card">

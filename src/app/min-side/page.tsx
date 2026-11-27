@@ -77,7 +77,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ k
             <p style={{ color: 'var(--body)' }}>Fullfør alle {LESSONS.length} leksjonene for å få sertifikatet. Du mangler {LESSONS.length - n}.</p>
           )}
         </div>
-        {owner && <p style={{ marginTop: 28 }}><a className="btn btn-line btn-sm" href="/admin/klasser">Klassekoder (admin)</a></p>}
+        {owner && <p style={{ marginTop: 28 }}><a className="btn btn-line btn-sm" href="/admin/klasser">Klassekoder</a> <a className="btn btn-line btn-sm" href="/admin/tilbakemeldinger">Tilbakemeldinger</a></p>}
         <p className="small muted" style={{ marginTop: 28 }}>Spørsmål om kontoen eller betaling: <a href={`mailto:${CONTACT}`}>{CONTACT}</a></p>
       </main>
       <Footer />

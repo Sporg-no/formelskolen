@@ -46,3 +46,15 @@ create table if not exists public.fs_classes (
   created_at timestamptz not null default now()
 );
 alter table public.fs_classes enable row level security;
+
+-- Tilbakemeldinger fra brukere. Bare serveren leser og skriver.
+create table if not exists public.fs_feedback (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  page text,
+  lesson_slug text,
+  message text not null check (char_length(message) between 2 and 2000),
+  email text check (email is null or char_length(email) <= 200),
+  user_id uuid references auth.users(id) on delete set null
+);
+alter table public.fs_feedback enable row level security;

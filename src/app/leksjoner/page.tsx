@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Nav from '@/components/Nav';
+import TesterBanner from '@/components/TesterBanner';
 import Footer from '@/components/Footer';
 import LessonList from '@/components/LessonList';
 import { LESSONS, MODULES, FREE_COUNT } from '@/content/lessons';
@@ -13,6 +14,7 @@ export default async function Page() {
   const items = LESSONS.map(l => ({ slug: l.slug, nr: l.nr, title: l.title, summary: l.summary, minutes: l.minutes, free: !!l.free, module: l.module }));
   return (
     <>
+      <TesterBanner />
       <Nav />
       <main className="wrap" style={{ paddingTop: 24, paddingBottom: 88 }}>
         <div className="eyebrow">Leksjoner</div>

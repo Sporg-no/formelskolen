@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import SheetView from '@/components/sheet/SheetView';
 import Prose from '@/components/Prose';
+import Feedback from '@/components/Feedback';
 import { Sheet } from '@/lib/engine/sheet';
 import { gradeTask, taskCells, expand, type GradeResult } from '@/lib/engine/grade';
 import { shiftFormula } from '@/lib/engine/sheet';
@@ -149,6 +150,7 @@ export default function LessonPlayer({ lesson, total, loggedIn, next }: Props) {
               ) : <a className="btn btn-sig btn-sm" href="/min-side">Hent sertifikatet</a>}
               <a className="btn btn-line btn-sm" href="/leksjoner">Alle leksjoner</a>
             </div>
+            <div style={{ marginTop: 14 }}><Feedback lesson={lesson.slug} loggedIn={loggedIn} dark label="Hvordan var leksjonen? Si fra" prompt="Hva var bra, og hva var vanskelig?" /></div>
           </div>
         )}
       </aside>
@@ -159,7 +161,8 @@ export default function LessonPlayer({ lesson, total, loggedIn, next }: Props) {
             <span className="small muted" style={{ whiteSpace: 'nowrap' }}>{doneCount} av {lesson.tasks.length} oppgaver</span>
             <div className="progressbar" style={{ flex: 1, maxWidth: 260 }}><div style={{ width: `${(doneCount / lesson.tasks.length) * 100}%` }} /></div>
           </div>
-          <button type="button" className="btn btn-ghost btn-xs" onClick={reset}>{confirmReset ? 'Klikk igjen for å tilbakestille' : 'Tilbakestill arket'}</button>
+          <span style={{ display: 'flex', gap: 4, alignItems: 'center' }}><Feedback lesson={lesson.slug} loggedIn={loggedIn} />
+          <button type="button" className="btn btn-ghost btn-xs" onClick={reset}>{confirmReset ? 'Klikk igjen for å tilbakestille' : 'Tilbakestill arket'}</button></span>
         </div>
         <SheetView
           key={sheetKey}
