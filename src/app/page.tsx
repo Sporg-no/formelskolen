@@ -48,10 +48,10 @@ export default async function Home() {
 
       <section className="dark">
         <div className="section wrap">
-          <div className="eyebrow">Hvorfor norsk</div>
-          <h2 className="h2">Engelske kurs gir norske feilmeldinger.</h2>
+          <div className="eyebrow">Hvorfor Formelskolen</div>
+          <h2 className="h2">Du lærer ved å gjøre, ikke ved å se på.</h2>
           <p className="lead" style={{ marginTop: 18 }}>
-            I norsk Excel heter VLOOKUP <code>FINN.RAD</code>, argumentene skilles med semikolon, og desimaltall skrives med komma. Følger du en engelsk video, får du <code>#NAVN?</code>. Her lærer du formlene slik de faktisk skrives på en norsk PC.
+            En video er lett å se og lett å glemme. Her skriver du formlene selv i et regneark og får vite med en gang om de er riktige. Alt er på norsk, med de samme funksjonsnavnene og semikolonene som i Excel på jobb.
           </p>
           <div className="grid3" style={{ marginTop: 44 }}>
             <div className="feature">
